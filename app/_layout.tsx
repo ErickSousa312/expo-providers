@@ -1,5 +1,9 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -27,6 +31,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     ...FontAwesome.font,
   });
@@ -51,20 +56,29 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const path = usePathname().replace(/^\//, ""); 
-  console.log(path)
+  const path = usePathname().replace(/^\//, '');
+  console.log(path);
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer 
-      screenOptions={{
-        headerTitle(props) {
-          return <View><Text style={{fontSize:22, paddingLeft:10, fontWeight:700}}>{path ==''?'Dólar Americano':path}</Text></View>;
-        },}}
-      initialRouteName={"Euro"}
-      drawerContent={CustomDrawerContent}>
-      </Drawer>
+        <Drawer
+          screenOptions={{
+            headerTitle(props) {
+              return (
+                <View>
+                  <Text
+                    style={{ fontSize: 22, paddingLeft: 10, fontWeight: 700 }}
+                  >
+                    {path == '' ? 'Dólar Americano' : path}
+                  </Text>
+                </View>
+              );
+            },
+          }}
+          initialRouteName={'Euro'}
+          drawerContent={CustomDrawerContent}
+        ></Drawer>
       </GestureHandlerRootView>
     </ThemeProvider>
   );
