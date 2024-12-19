@@ -11,6 +11,10 @@ const useAsyncStorageClass = (key: any, initialValue: any) => {
   const saveValue = useCallback(
     async (value: any) => {
       try {
+        if (value.length === 0) {
+          addToast({ message: "Digite um nome para a turma", type: "error" });
+          return false;
+        }
         const ClassArrayString = await AsyncStorage.getItem(key);
         if (!ClassArrayString) {
           console.log("entrou para criar o array vazio");

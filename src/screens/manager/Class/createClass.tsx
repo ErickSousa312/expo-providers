@@ -42,7 +42,11 @@ export const CreateClass = () => {
       {/* <Button onPress={() => console.log(storedValue)}>
         <ButtonText>recuperar dados</ButtonText>
       </Button> */}
-      <Button onPress={() => saveValue(inputClass)}>
+      <Button
+        onPress={() => {
+          saveValue(inputClass);
+        }}
+      >
         <ButtonText>Criar</ButtonText>
       </Button>
       {/* <Button onPress={() => removeAllValues()}>

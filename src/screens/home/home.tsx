@@ -5,13 +5,18 @@ import { heightScreen } from "../../constants/DimensionScreen";
 import { CardsCustom } from "@/components/cards/card";
 import { useRouter } from "expo-router";
 import useAsyncStorageClass from "@/hooks/useAsyncStorageClass";
+import { useEffect } from "react";
 
 export const HomeScreen = () => {
   const { toggleTheme } = useThemeStyled();
 
-  const { storedValue } = useAsyncStorageClass("turma", []);
+  const { storedValue, loadValue } = useAsyncStorageClass("turma", []);
 
   const route = useRouter();
+
+  useEffect(() => {
+    loadValue();
+  }, [storedValue]);
 
   return (
     <Container>
