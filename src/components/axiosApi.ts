@@ -15,10 +15,10 @@ const apiAxios = axios.create({
 // });
 
 apiAxios.interceptors.response.use(
-  (response:any ) => {
+  (response: any) => {
     return response;
   },
-  (error:any) => {
+  (error: any) => {
     if (error.response) {
       const status = error.response.status;
       if (status >= 200 && status < 600) {
