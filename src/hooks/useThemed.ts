@@ -1,4 +1,4 @@
-import { ThemeContextStyle } from "@/context/ThemeContextStyle";
+import { ThemeContextStyle } from "@/contexts/ThemeContextStyle";
 import { useContext } from "react";
 
 interface ThemeContextProps {

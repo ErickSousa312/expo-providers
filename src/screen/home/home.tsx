@@ -1,4 +1,4 @@
-import { useThemeStyled } from "@/hook/useThemed";
+import { useThemeStyled } from "@/hooks/useThemed";
 import { Button, ButtonText, Container, Title } from "./style";
 
 export const HomeScreen = () => {

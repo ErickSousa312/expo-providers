@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ThemeProviderStyled } from "@/context/ThemeProvider";
+import { ThemeProviderStyled } from "@/contexts/ThemeProvider";
 
 export {
   // Catch any errors thrown by the Layout component.

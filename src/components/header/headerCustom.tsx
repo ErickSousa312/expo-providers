@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, HeaderContainer } from "./styleHeaderCustom";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useThemeStyled } from "@/hook/useThemed";
+import { useThemeStyled } from "@/hooks/useThemed";
 
 export const HeaderCustom = () => {
   const { toggleTheme, isDarkMode } = useThemeStyled();
