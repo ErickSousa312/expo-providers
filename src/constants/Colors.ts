@@ -1,19 +1,20 @@
-const tintColorLight = "#2f95dc";
-const tintColorDark = "#fff";
-
-export default {
-  light: {
-    text: "#000",
-    background: "#fff",
-    tint: tintColorLight,
-    tabIconDefault: "#ccc",
-    tabIconSelected: tintColorLight,
-  },
-  dark: {
-    text: "#fff",
-    background: "#000",
-    tint: tintColorDark,
-    tabIconDefault: "#ccc",
-    tabIconSelected: tintColorDark,
+export const lightTheme = {
+  colors: {
+    background: "#f8f9fa",
+    text: "#212529",
+    buttonBackground: "#00875F",
+    buttonText: "",
   },
 };
+
+export const darkTheme = {
+  colors: {
+    background: "#212529",
+    text: "#f8f9fa",
+    buttonBackground: "#00875F",
+    buttonText: "#ffffff",
+  },
+};
+
+// Tipagem do tema
+export type ThemeType = typeof lightTheme;

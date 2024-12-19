@@ -1,9 +1,4 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack, usePathname } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -11,9 +6,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Drawer } from "expo-router/drawer";
-import CustomDrawerContent from "@/components/customDrawer";
-import { Text, View } from "react-native";
+import { ThemeProviderStyled } from "@/context/ThemeProvider";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -55,27 +48,18 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const path = usePathname().replace(/^\//, "");
-  console.log(path);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer
-        screenOptions={{
-          headerTitle(props) {
-            return (
-              <View>
-                <Text
-                  style={{ fontSize: 22, paddingLeft: 10, fontWeight: 700 }}
-                >
-                  {path == "" ? "Dólar Americano" : path}
-                </Text>
-              </View>
-            );
-          },
-        }}
-        initialRouteName={"index"}
-        drawerContent={CustomDrawerContent}
-      ></Drawer>
-    </GestureHandlerRootView>
+    <ThemeProviderStyled>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            headerTitle: "",
+          }}
+          initialRouteName={"index"}
+        ></Stack>
+      </GestureHandlerRootView>
+    </ThemeProviderStyled>
   );
 }
