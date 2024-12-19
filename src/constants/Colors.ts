@@ -6,6 +6,8 @@ export const lightTheme = {
     buttonBackground: "#00875F",
     buttonText: "",
     subText: "#7C7C8A",
+    inputBackground: "#fff",
+    inputBorder: "#ddd",
   },
 };
 
@@ -17,6 +19,8 @@ export const darkTheme = {
     buttonBackground: "#00875F",
     buttonText: "#ffffff",
     subText: "#7C7C8A",
+    inputBackground: "#121214",
+    inputBorder: "#444",
   },
 };
 

@@ -1,20 +1,20 @@
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
-export const HeaderContainer = styled.View`
+export const ContainerButtonBackNavigate = styled.View`
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
   background-color: transparent;
   width: 80px;
   padding: 15px;
   position: absolute;
   top: 0;
-  right: 0;
-  z-index: 1;
+  left: 0;
+  z-index: 5;
 `;
 
-export const Button = styled(TouchableOpacity)`
-  background-color: ${(props) => props.theme.colors.buttonBackground};
+export const ButtonBack = styled(TouchableOpacity)`
+  background-color: transparent;
   flex-direction: column;
   justify-content: center;
   align-items: center;

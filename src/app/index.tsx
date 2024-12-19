@@ -1,5 +1,5 @@
 import { HomeScreen } from "@/screens/home/home";
 
-export default function TabOneScreen() {
+export default function Home() {
   return <HomeScreen></HomeScreen>;
 }

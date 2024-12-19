@@ -6,7 +6,8 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { ThemeProviderStyled } from "@/contexts/ThemeProvider";
+import { ThemeProviderStyled } from "@/contexts/Theme/ThemeProvider";
+import { ToastProvider } from "@/contexts/Toast/ToastContext";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -48,18 +49,24 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const path = usePathname().replace(/^\//, "");
+  console.log(path);
 
   return (
     <ThemeProviderStyled>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            headerTitle: "",
-          }}
-          initialRouteName={"index"}
-        ></Stack>
-      </GestureHandlerRootView>
+      <ToastProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              headerTitle: "",
+              contentStyle: {
+                backgroundColor: "red",
+              },
+            }}
+            initialRouteName={"index"}
+          ></Stack>
+        </GestureHandlerRootView>
+      </ToastProvider>
     </ThemeProviderStyled>
   );
 }
