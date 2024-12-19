@@ -10,7 +10,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/components/useColorScheme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
 import CustomDrawerContent from '@/components/customDrawer';
@@ -55,31 +54,28 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
   const path = usePathname().replace(/^\//, '');
   console.log(path);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Drawer
-          screenOptions={{
-            headerTitle(props) {
-              return (
-                <View>
-                  <Text
-                    style={{ fontSize: 22, paddingLeft: 10, fontWeight: 700 }}
-                  >
-                    {path == '' ? 'Dólar Americano' : path}
-                  </Text>
-                </View>
-              );
-            },
-          }}
-          initialRouteName={'Euro'}
-          drawerContent={CustomDrawerContent}
-        ></Drawer>
-      </GestureHandlerRootView>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Drawer
+        screenOptions={{
+          headerTitle(props) {
+            return (
+              <View>
+                <Text
+                  style={{ fontSize: 22, paddingLeft: 10, fontWeight: 700 }}
+                >
+                  {path == '' ? 'Dólar Americano' : path}
+                </Text>
+              </View>
+            );
+          },
+        }}
+        initialRouteName={'index'}
+        drawerContent={CustomDrawerContent}
+      ></Drawer>
+    </GestureHandlerRootView>
   );
 }

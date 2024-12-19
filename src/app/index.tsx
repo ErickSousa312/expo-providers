@@ -1,20 +1,25 @@
-import { Keyboard, Pressable, StyleSheet, TextInput } from 'react-native';
+import {
+  Keyboard,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import React, { useRef } from 'react';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
 import { useEffect, useState } from 'react';
 import apiAxios from '@/components/axiosApi';
 import { CurrencyData } from '@/@types/typeCurrentData';
 import { Image } from 'expo-image';
-import euro from '@/assets/images/euro.png';
+import dolar from '@/assets/images/dolar.png';
 
 export default function TabOneScreen() {
   const [coinData, setCoinData] = useState<CurrencyData[]>();
   const [error, setError] = useState('');
 
   async function fetchPriceCoin() {
-    const response = await apiAxios.get(`EUR-BRL/1`);
+    const response = await apiAxios.get(`USD-BRL/1`);
     console.log(response.data);
     if (response.status == 200) {
       return setCoinData(response.data);
@@ -33,16 +38,16 @@ export default function TabOneScreen() {
         style={{
           backgroundColor: '#00000000',
           width: 250,
-          height: 230,
+          height: 210,
           alignItems: 'center',
           marginTop: 100,
         }}
       >
-        <Image style={styles.image} source={euro} transition={1000} />
+        <Image style={styles.image} source={dolar} transition={1000} />
       </View>
 
       <View style={{ backgroundColor: 'whites', marginTop: 30 }}>
-        <Text style={styles.labelData1}>O Euro está:</Text>
+        <Text style={styles.labelData1}>O DólarAmericano está:</Text>
       </View>
       <View style={{ backgroundColor: 'whites', marginTop: 30 }}>
         <Text style={styles.labelData}>
