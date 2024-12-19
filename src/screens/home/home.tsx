@@ -4,19 +4,14 @@ import { RocketIcon } from "@/components/svgs/rocketIcon";
 import { heightScreen } from "../../constants/DimensionScreen";
 import { CardsCustom } from "@/components/cards/card";
 import { useRouter } from "expo-router";
+import useAsyncStorageClass from "@/hooks/useAsyncStorageClass";
 
 export const HomeScreen = () => {
   const { toggleTheme } = useThemeStyled();
 
-  const route = useRouter();
+  const { storedValue } = useAsyncStorageClass("turma", []);
 
-  const data = [
-    { title: "Turma 1" },
-    { title: "Turma 2" },
-    { title: "Turma 3" },
-    { title: "Turma 4" },
-    { title: "Turma 5" },
-  ];
+  const route = useRouter();
 
   return (
     <Container>
@@ -30,7 +25,7 @@ export const HomeScreen = () => {
         width={"90%"}
         marginTop={25}
         marginBottom={100}
-        data={data}
+        data={storedValue}
       ></CardsCustom>
     </Container>
   );
