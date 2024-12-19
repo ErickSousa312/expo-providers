@@ -3,9 +3,12 @@ import { RocketIcon } from "@/components/svgs/rocketIcon";
 import { CardsCustom } from "@/components/cards/card";
 import {
   Button,
+  ButtonAdd,
   ButtonText,
+  ButtonTime,
   Container,
   InputContainer,
+  InputContainerTime,
   StyledInput,
   SubTitle,
   Title,
@@ -15,20 +18,30 @@ import useAsyncStorageclass from "@/hooks/useAsyncStorageClass";
 import { darkTheme, lightTheme } from "@/constants/Colors";
 import { useState } from "react";
 import { useToast } from "@/contexts/Toast/ToastContext";
+import { router, useLocalSearchParams } from "expo-router";
+import { Entypo } from "@expo/vector-icons";
 
 export const MenberHandler = () => {
+  const { title } = useLocalSearchParams<{ title: string }>();
   const { isDarkMode } = useThemeStyled();
   const [inputClass, setInputClass] = useState("");
+  const [timeSelected, setTimeSelected] = useState("");
   const { addToast } = useToast();
-  const { storedValue, saveValue, removeAllValues, onError, loadValue } =
-    useAsyncStorageclass("turma", []);
+  const {
+    storedValue,
+    saveValue,
+    removeAllValues,
+    onError,
+    loadValue,
+    removeOneValue,
+  } = useAsyncStorageclass("turma", []);
 
   return (
     <Container>
       <ButtonBackNavigateCustom />
       <RocketIcon />
-      <Title style={{ marginTop: 15 }}>Nova Turma</Title>
-      <SubTitle>crie uma turma para adicionar pessoas</SubTitle>
+      <Title style={{ marginTop: 15 }}>{title}</Title>
+      <SubTitle>adicione a galera e separe os times</SubTitle>
       <InputContainer>
         <StyledInput
           onChangeText={(text: string) => setInputClass(text)}
@@ -36,29 +49,38 @@ export const MenberHandler = () => {
           placeholderTextColor={
             isDarkMode ? darkTheme.colors.text : lightTheme.colors.text
           }
-          placeholder="Nome da turma"
+          placeholder="Nome do participante"
         ></StyledInput>
+        <ButtonAdd>
+          <Entypo
+            style={{ marginLeft: 1 }}
+            name="plus"
+            size={35}
+            color="green"
+          />
+        </ButtonAdd>
       </InputContainer>
-      {/* <Button onPress={() => console.log(storedValue)}>
-        <ButtonText>recuperar dados</ButtonText>
-      </Button> */}
+      <InputContainerTime>
+        <ButtonTime border={true}>
+          <Title bold={true} fontSize={"15px"}>
+            Time A
+          </Title>
+        </ButtonTime>
+        <ButtonTime border={false}>
+          <Title bold={true} fontSize={"15px"}>
+            Time B
+          </Title>
+        </ButtonTime>
+      </InputContainerTime>
       <Button
+        color={"#da2834"}
         onPress={() => {
-          saveValue(inputClass);
+          removeOneValue(title);
+          router.push("/");
         }}
       >
-        <ButtonText>Criar</ButtonText>
+        <ButtonText>Remover a turma</ButtonText>
       </Button>
-      {/* <Button onPress={() => removeAllValues()}>
-        <ButtonText>Remover dados</ButtonText>
-      </Button> */}
-      {/* <Button
-        onPress={() =>
-          addToast({ message: "Turma criada com sucesso", type: "success" })
-        }
-      >
-        <ButtonText>{onError ? "true" : "false"}</ButtonText>
-      </Button> */}
     </Container>
   );
 };

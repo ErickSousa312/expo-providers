@@ -5,6 +5,7 @@ import { View, ViewStyle, StyleProp, DimensionValue } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Text, ContainerCard } from "./style";
 import GroupIcon from "../svgs/groupIcon";
+import { useRouter } from "expo-router";
 
 export const CardsCustom: React.FC<CardsCustomProps> = ({
   width,
@@ -15,6 +16,8 @@ export const CardsCustom: React.FC<CardsCustomProps> = ({
   marginBottom,
   data,
 }) => {
+  const router = useRouter();
+
   return (
     <ScrollView
       style={{
@@ -26,7 +29,15 @@ export const CardsCustom: React.FC<CardsCustomProps> = ({
       }}
     >
       {data?.map((item, index) => (
-        <ContainerCard key={index}>
+        <ContainerCard
+          onPress={() =>
+            router.push({
+              pathname: "/class/editClass",
+              params: { title: `${item.title}` },
+            })
+          }
+          key={index}
+        >
           <GroupIcon></GroupIcon>
           <Text>{item.title}</Text>
         </ContainerCard>

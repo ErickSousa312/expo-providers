@@ -54,17 +54,27 @@ function RootLayoutNav() {
   return (
     <ThemeProviderStyled>
       <ToastProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        <GestureHandlerRootView>
           <Stack
             screenOptions={{
               headerShown: false,
-              headerTitle: "",
-              contentStyle: {
-                backgroundColor: "red",
-              },
+              animationTypeForReplace: "push",
             }}
             initialRouteName={"index"}
-          ></Stack>
+          >
+            <Stack.Screen
+              name="index"
+              options={{ animation: "slide_from_left" }}
+            />
+            <Stack.Screen
+              name="class/editClass"
+              options={{ animation: "slide_from_right" }}
+            />
+            <Stack.Screen
+              name="class/createClass"
+              options={{ animation: "slide_from_right" }}
+            />
+          </Stack>
         </GestureHandlerRootView>
       </ToastProvider>
     </ThemeProviderStyled>

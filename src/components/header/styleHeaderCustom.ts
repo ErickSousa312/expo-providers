@@ -14,7 +14,7 @@ export const HeaderContainer = styled.View`
 `;
 
 export const Button = styled(TouchableOpacity)`
-  background-color: ${(props) => props.theme.colors.buttonBackground};
+  background-color: transparent;
   flex-direction: column;
   justify-content: center;
   align-items: center;

@@ -80,17 +80,17 @@ const useAsyncStorageClass = (key: any, initialValue: any) => {
           throw new Error("erros ao buscar dados");
         }
         const ConvertToArray: ClassType[] = JSON.parse(ClassArrayString);
-        ConvertToArray.map((item: ClassType) => {
-          if (item.title == value) {
-            setOnError(!onError);
-            setTimeout(() => setOnError(!onError), 3000);
-            throw new Error("item ja existe");
-          }
-        });
-        console.log(`Data removed from AsyncStorage with key: ${key}`);
+        const newArray: ClassType[] = ConvertToArray.filter(
+          (item: ClassType) => item.title !== value,
+        );
+        const newArrayConverted = JSON.stringify(newArray);
+        await AsyncStorage.setItem(key, newArrayConverted);
+        addToast({ message: "Turma apagada com sucesso", type: "success" });
+        setStoredValue(newArray);
+        console.log(`Data removed from AsyncStorage with key: ${value}`);
       } catch (error) {
         console.error(
-          `Error removing data from AsyncStorage with key: ${key}`,
+          `Error removing data from AsyncStorage with key: ${value}`,
           error,
         );
       }

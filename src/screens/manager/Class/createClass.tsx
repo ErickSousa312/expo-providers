@@ -15,6 +15,7 @@ import useAsyncStorageclass from "@/hooks/useAsyncStorageClass";
 import { darkTheme, lightTheme } from "@/constants/Colors";
 import { useState } from "react";
 import { useToast } from "@/contexts/Toast/ToastContext";
+import CreateClassIcon from "@/components/svgs/createClassIcon";
 
 export const CreateClass = () => {
   const { isDarkMode } = useThemeStyled();
@@ -26,7 +27,7 @@ export const CreateClass = () => {
   return (
     <Container>
       <ButtonBackNavigateCustom />
-      <RocketIcon />
+      <CreateClassIcon />
       <Title style={{ marginTop: 15 }}>Nova Turma</Title>
       <SubTitle>crie uma turma para adicionar pessoas</SubTitle>
       <InputContainer>
