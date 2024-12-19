@@ -1,6 +1,7 @@
 // src/screens/Home/HomeScreen.styles.ts
+import { Theme } from "@/@types/themeType";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { heightScreen, widthScreen } from "@/constants/DimensionScreen";
 
 export interface HomeScreenProps {

@@ -10,7 +10,7 @@ export const ButtonBackNavigateCustom = () => {
 
   return (
     <ContainerButtonBackNavigate>
-      <ButtonBack onPress={() => router.back()}>
+      <ButtonBack onPress={() => router.replace("/")}>
         {isDarkMode ? (
           <AntDesign
             style={{ marginLeft: 1 }}

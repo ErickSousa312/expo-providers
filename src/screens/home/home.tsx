@@ -6,17 +6,22 @@ import { CardsCustom } from "@/components/cards/card";
 import { useRouter } from "expo-router";
 import useAsyncStorageClass from "@/hooks/useAsyncStorageClass";
 import { useEffect } from "react";
+import { View } from "react-native-reanimated/lib/typescript/Animated";
+import { Text } from "react-native";
 
 export const HomeScreen = () => {
   const { toggleTheme } = useThemeStyled();
 
-  const { storedValue, loadValue } = useAsyncStorageClass("turma", []);
+  const { storedValue, loadValue, onUpdate } = useAsyncStorageClass(
+    "turma",
+    [],
+  );
 
   const route = useRouter();
 
   useEffect(() => {
     loadValue();
-  }, [storedValue]);
+  }, [onUpdate]);
 
   return (
     <Container>

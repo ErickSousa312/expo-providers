@@ -5,6 +5,7 @@ import { useToast } from "@/contexts/Toast/ToastContext";
 
 const useAsyncStorageClass = (key: any, initialValue: any) => {
   const [storedValue, setStoredValue] = useState(initialValue);
+  const [onUpdate, setUpdate] = useState(false);
   const [onError, setOnError] = useState(false);
   const { addToast } = useToast();
 
@@ -23,6 +24,7 @@ const useAsyncStorageClass = (key: any, initialValue: any) => {
           const jsonValue = JSON.stringify(newArray);
           await AsyncStorage.setItem(key, jsonValue);
           setStoredValue(jsonValue);
+          addToast({ message: "Turma criada com sucesso", type: "success" });
           return true;
         }
         const ConvertToArray: ClassType[] = JSON.parse(ClassArrayString);
@@ -39,6 +41,7 @@ const useAsyncStorageClass = (key: any, initialValue: any) => {
         await AsyncStorage.setItem(key, jsonValue);
         setStoredValue(jsonValue);
         addToast({ message: "Turma criada com sucesso", type: "success" });
+        setUpdate((prev) => !prev);
         console.log(`Data saved to AsyncStorage with key: ${key}`);
       } catch (error) {
         console.error(
@@ -119,6 +122,7 @@ const useAsyncStorageClass = (key: any, initialValue: any) => {
     removeAllValues,
     removeOneValue,
     onError,
+    onUpdate,
   };
 };
 
