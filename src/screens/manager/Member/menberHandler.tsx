@@ -20,21 +20,21 @@ import { useState } from "react";
 import { useToast } from "@/contexts/Toast/ToastContext";
 import { router, useLocalSearchParams } from "expo-router";
 import { Entypo } from "@expo/vector-icons";
+import useAsyncStorageMember from "@/hooks/useAsyncStorageMember";
+import { Pressable } from "react-native";
+import { CardsCustomMember } from "@/components/cards/cardMember";
+import ProfileIcon from "@/components/svgs/profileIcon";
 
 export const MenberHandler = () => {
   const { title } = useLocalSearchParams<{ title: string }>();
   const { isDarkMode } = useThemeStyled();
-  const [inputClass, setInputClass] = useState("");
-  const [timeSelected, setTimeSelected] = useState("");
+  const [inputMember, setInputClass] = useState("");
+  const [timeSelected, setTimeSelected] = useState<"team1" | "team2">("team1");
   const { addToast } = useToast();
-  const {
-    storedValue,
-    saveValue,
-    removeAllValues,
-    onError,
-    loadValue,
-    removeOneValue,
-  } = useAsyncStorageclass("turma", []);
+  const { removeOneValue } = useAsyncStorageclass("turma", []);
+
+  const { storedValueMenber, saveValueMenber, removeOneValueMenber } =
+    useAsyncStorageMember(title, []);
 
   return (
     <Container>
@@ -45,13 +45,17 @@ export const MenberHandler = () => {
       <InputContainer>
         <StyledInput
           onChangeText={(text: string) => setInputClass(text)}
-          value={inputClass}
+          value={inputMember}
           placeholderTextColor={
             isDarkMode ? darkTheme.colors.text : lightTheme.colors.text
           }
           placeholder="Nome do participante"
         ></StyledInput>
-        <ButtonAdd>
+        <ButtonAdd
+          onPress={() => {
+            saveValueMenber(inputMember, timeSelected);
+          }}
+        >
           <Entypo
             style={{ marginLeft: 1 }}
             name="plus"
@@ -61,17 +65,30 @@ export const MenberHandler = () => {
         </ButtonAdd>
       </InputContainer>
       <InputContainerTime>
-        <ButtonTime border={true}>
+        <ButtonTime
+          onPress={() => setTimeSelected("team1")}
+          border={timeSelected === "team1"}
+        >
           <Title bold={true} fontSize={"15px"}>
-            Time A
+            TIME A
           </Title>
         </ButtonTime>
-        <ButtonTime border={false}>
+        <ButtonTime
+          onPress={() => setTimeSelected("team2")}
+          border={timeSelected === "team2"}
+        >
           <Title bold={true} fontSize={"15px"}>
-            Time B
+            TIME B
           </Title>
         </ButtonTime>
       </InputContainerTime>
+      <CardsCustomMember
+        width={"90%"}
+        data={storedValueMenber[timeSelected]}
+        Icon={() => <ProfileIcon />}
+        onPress={removeOneValueMenber}
+        timeSelected={timeSelected}
+      ></CardsCustomMember>
       <Button
         color={"#da2834"}
         onPress={() => {
@@ -81,6 +98,13 @@ export const MenberHandler = () => {
       >
         <ButtonText>Remover a turma</ButtonText>
       </Button>
+      {/* <Pressable
+        onPress={() => {
+          console.log(storedValueMenber);
+        }}
+      >
+        <ButtonText>Vizalizar dados</ButtonText>
+      </Pressable> */}
     </Container>
   );
 };

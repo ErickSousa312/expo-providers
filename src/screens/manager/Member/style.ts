@@ -87,7 +87,7 @@ export const ButtonTime = styled(TouchableOpacity)<{ border?: boolean }>`
 export const StyledInput = styled.TextInput`
   width: 100%;
   height: 50px;
-  border-radius: 4px;
+  border-radius: 7px;
   padding: 10px;
   font-size: 16px;
   color: ${(props) => props.theme.colors.text};

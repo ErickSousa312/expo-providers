@@ -5,5 +5,8 @@ export type CardsCustomProps = {
   marginLeft?: DimensionValue | undefined;
   marginRight?: DimensionValue | undefined;
   marginBottom?: DimensionValue | undefined;
-  data?: { title: string }[];
+  data?: MemberType;
+  Icon?: React.ElementType;
+  onPress?: (value: any, teamNumber: "team1" | "team2") => Promise<void>;
+  timeSelected?: "team1" | "team2";
 };

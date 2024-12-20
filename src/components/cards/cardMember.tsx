@@ -3,11 +3,13 @@ import { CardsCustomProps } from "@/@types/CardsCustomProps";
 import React from "react";
 import { View, ViewStyle, StyleProp, DimensionValue } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Text, ContainerCard } from "./style";
+import { Text, ContainerCard, IconExclude } from "./style";
 import GroupIcon from "../svgs/groupIcon";
 import { useRouter } from "expo-router";
+import { PeopleType } from "@/@types/MemberType";
+import ExcludeIcon from "../svgs/excludeIcon";
 
-export const CardsCustom: React.FC<CardsCustomProps> = ({
+export const CardsCustomMember: React.FC<CardsCustomProps> = ({
   width,
   height,
   marginTop,
@@ -16,9 +18,9 @@ export const CardsCustom: React.FC<CardsCustomProps> = ({
   marginBottom,
   data,
   Icon,
+  onPress,
+  timeSelected,
 }) => {
-  const router = useRouter();
-
   return (
     <ScrollView
       style={{
@@ -29,18 +31,20 @@ export const CardsCustom: React.FC<CardsCustomProps> = ({
         marginBottom: marginBottom ? marginBottom : 0,
       }}
     >
-      {data?.map((item: any, index: string) => (
-        <ContainerCard
-          onPress={() =>
-            router.push({
-              pathname: "/class/editClass",
-              params: { title: `${item.title}` },
-            })
-          }
-          key={index}
-        >
-          <GroupIcon></GroupIcon>
-          <Text>{item.title}</Text>
+      {data?.map((item: PeopleType, index: number) => (
+        <ContainerCard key={index}>
+          {Icon ? <Icon /> : <GroupIcon></GroupIcon>}
+          <Text>{item.name}</Text>
+          <IconExclude
+            onPress={() => {
+              if (onPress && timeSelected) {
+                console.log(item.name, timeSelected);
+                onPress(item.name, timeSelected);
+              }
+            }}
+          >
+            <ExcludeIcon />
+          </IconExclude>
         </ContainerCard>
       ))}
     </ScrollView>
