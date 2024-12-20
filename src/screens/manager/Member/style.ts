@@ -13,7 +13,7 @@ export const Container = styled.View`
   align-items: center;
   padding-top: 60px;
   justify-content: flex-start;
-  padding-bottom: 180px;
+  padding-bottom: 80px;
   background-color: ${(props) => props.theme.colors.background};
 `;
 
