@@ -23,7 +23,7 @@ const useAsyncStorageMember = (key: any, initialValue: any) => {
           newArray[teamNumber].push({ name: value });
           const jsonValue = JSON.stringify(newArray);
           await AsyncStorage.setItem(key, jsonValue);
-          setStoredValue(jsonValue);
+          setStoredValue(newArray);
           addToast({
             message: "Membro adicionado com sucesso",
             type: "success",
@@ -107,7 +107,7 @@ const useAsyncStorageMember = (key: any, initialValue: any) => {
   const removeAllValuesMenber = useCallback(async () => {
     try {
       await AsyncStorage.removeItem(key);
-      setStoredValue(null);
+      setStoredValue([]);
       console.log(`Data removed from AsyncStorage with key: ${key}`);
     } catch (error) {
       console.error(

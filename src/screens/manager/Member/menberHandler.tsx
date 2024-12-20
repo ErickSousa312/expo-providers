@@ -33,8 +33,12 @@ export const MenberHandler = () => {
   const { addToast } = useToast();
   const { removeOneValue } = useAsyncStorageclass("turma", []);
 
-  const { storedValueMenber, saveValueMenber, removeOneValueMenber } =
-    useAsyncStorageMember(title, []);
+  const {
+    storedValueMenber,
+    saveValueMenber,
+    removeOneValueMenber,
+    removeAllValuesMenber,
+  } = useAsyncStorageMember(title, []);
 
   return (
     <Container>
@@ -91,8 +95,9 @@ export const MenberHandler = () => {
       ></CardsCustomMember>
       <Button
         color={"#da2834"}
-        onPress={() => {
-          removeOneValue(title);
+        onPress={async () => {
+          await removeOneValue(title);
+          await removeAllValuesMenber();
           router.push("/");
         }}
       >
